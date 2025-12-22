@@ -1,0 +1,57 @@
+<div class="home">
+  <!-- Hero Section -->
+  <section class="hero section">
+    <div class="container">
+      <div class="hero-content">
+        <h1>Professional Web Solutions for Your Business</h1>
+        <p class="hero-subtitle">
+          Transforming ideas into powerful web applications. Custom-built solutions that drive
+          results and exceed expectations.
+        </p>
+        <div class="hero-actions">
+          <a routerLink="/demos" class="btn">View Our Work</a>
+          <a routerLink="/contact" class="btn btn-outline">Get In Touch</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Demos Section -->
+  <section class="demos-preview section">
+    <div class="container">
+      <h2 class="text-center">Featured Projects</h2>
+      <p class="section-intro text-center">
+        Explore our portfolio of web solutions designed to meet diverse business needs.
+      </p>
+
+      <div class="demo-cards">
+        @for (demo of demos; track demo.id) {
+          <div class="demo-card">
+            <h3>{{ demo.title }}</h3>
+            <p>{{ demo.description }}</p>
+            <div class="demo-tags">
+              @for (tag of demo.tags; track tag) {
+                <span class="tag">{{ tag }}</span>
+              }
+            </div>
+            <a [routerLink]="['/demos', demo.id]" class="demo-link">View Demo &rarr;</a>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta section">
+    <div class="container">
+      <div class="cta-content">
+        <h2>Ready to Build Something Great?</h2>
+        <p>
+          Let's discuss how we can help bring your vision to life with a custom web solution
+          tailored to your business.
+        </p>
+        <a routerLink="/contact" class="btn">Start a Conversation</a>
+      </div>
+    </div>
+  </section>
+</div>

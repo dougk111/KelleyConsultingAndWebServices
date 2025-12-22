@@ -1,0 +1,136 @@
+/* Page Header */
+.page-header {
+  background-color: var(--color-background-alt);
+  text-align: center;
+}
+
+.page-intro {
+  color: var(--color-text-light);
+  font-size: 1.125rem;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+/* Contact Info Section */
+.contact-info {
+  background-color: var(--color-background);
+}
+
+.contact-content {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: var(--spacing-2xl);
+}
+
+/* Contact Card */
+.contact-card {
+  background-color: var(--color-background);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: var(--spacing-xl);
+}
+
+.contact-card h2 {
+  margin-bottom: var(--spacing-md);
+}
+
+.contact-description {
+  color: var(--color-text-light);
+  line-height: 1.6;
+  margin-bottom: var(--spacing-xl);
+}
+
+.contact-details {
+  margin-bottom: var(--spacing-xl);
+}
+
+.contact-item {
+  display: flex;
+  gap: var(--spacing-md);
+  align-items: start;
+  padding: var(--spacing-md);
+  background-color: var(--color-background-alt);
+  border-radius: 6px;
+}
+
+.contact-icon {
+  color: var(--color-primary);
+  flex-shrink: 0;
+}
+
+.contact-text h3 {
+  font-size: 1rem;
+  margin-bottom: var(--spacing-xs);
+}
+
+.contact-text a {
+  color: var(--color-primary);
+  font-weight: 500;
+  font-size: 1.1rem;
+}
+
+.contact-cta {
+  text-align: center;
+  padding-top: var(--spacing-md);
+  border-top: 1px solid var(--color-border);
+}
+
+/* Info Sidebar */
+.info-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.info-box {
+  background-color: var(--color-background-alt);
+  padding: var(--spacing-lg);
+  border-radius: 6px;
+}
+
+.info-box h3 {
+  color: var(--color-text);
+  font-size: 1rem;
+  margin-bottom: var(--spacing-sm);
+}
+
+.info-box p {
+  color: var(--color-text-light);
+  margin-bottom: var(--spacing-xs);
+}
+
+.info-box p:last-child {
+  margin-bottom: 0;
+}
+
+.info-box ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.info-box li {
+  color: var(--color-text-light);
+  padding: var(--spacing-xs) 0;
+  padding-left: var(--spacing-md);
+  position: relative;
+}
+
+.info-box li::before {
+  content: '•';
+  color: var(--color-primary);
+  font-weight: bold;
+  position: absolute;
+  left: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .contact-content {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-card {
+    padding: var(--spacing-lg);
+  }
+}

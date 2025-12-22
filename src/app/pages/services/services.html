@@ -1,0 +1,50 @@
+<div class="services">
+  <!-- Header Section -->
+  <section class="page-header section">
+    <div class="container">
+      <h1>Our Services</h1>
+      <p class="page-intro">
+        Comprehensive web solutions designed to help your business succeed in the digital world.
+      </p>
+    </div>
+  </section>
+
+  <!-- Services List Section -->
+  <section class="services-list section">
+    <div class="container">
+      <div class="services-grid">
+        @for (service of services; track service.title) {
+          <div class="service-card">
+            <h3>{{ service.title }}</h3>
+            <p>{{ service.description }}</p>
+            <ul class="features-list">
+              @for (feature of service.features; track feature) {
+                <li>{{ feature }}</li>
+              }
+            </ul>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Process Section -->
+  <section class="process section">
+    <div class="container">
+      <h2 class="text-center">Our Process</h2>
+      <p class="section-intro text-center">
+        A proven approach to delivering quality web solutions on time and on budget.
+      </p>
+
+      <div class="process-steps">
+        @for (step of processSteps; track step.step) {
+          <div class="process-step">
+            <div class="step-number">{{ step.step }}</div>
+            <h3>{{ step.title }}</h3>
+            <p>{{ step.description }}</p>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+</div>

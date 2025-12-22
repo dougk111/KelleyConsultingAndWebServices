@@ -1,0 +1,38 @@
+<div class="demos">
+  <!-- Header Section -->
+  <section class="page-header section">
+    <div class="container">
+      <h1>Demo Portfolio</h1>
+      <p class="page-intro">
+        Explore our showcase of web solutions. Each demo represents a different approach to solving
+        real business challenges.
+      </p>
+    </div>
+  </section>
+
+  <!-- Demos Grid Section -->
+  <section class="demos-grid-section section">
+    <div class="container">
+      <div class="demos-grid">
+        @for (demo of demos; track demo.id) {
+          <div class="demo-item">
+            <div class="demo-category">{{ demo.category }}</div>
+            <h2>{{ demo.title }}</h2>
+            <p class="demo-description">{{ demo.description }}</p>
+
+            <div class="demo-features">
+              <h4>Key Features:</h4>
+              <ul>
+                @for (feature of demo.features; track feature) {
+                  <li>{{ feature }}</li>
+                }
+              </ul>
+            </div>
+
+            <a [routerLink]="['/demos', demo.id]" class="btn">Explore Demo</a>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+</div>

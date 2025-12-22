@@ -1,0 +1,146 @@
+/* Hero Section */
+.hero {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: var(--spacing-2xl) 0;
+}
+
+.hero-content {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.hero h1 {
+  color: white;
+  font-size: 3rem;
+  margin-bottom: var(--spacing-md);
+}
+
+.hero-subtitle {
+  font-size: 1.25rem;
+  margin-bottom: var(--spacing-xl);
+  opacity: 0.95;
+}
+
+.hero-actions {
+  display: flex;
+  gap: var(--spacing-md);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.hero .btn-outline {
+  background-color: transparent;
+  border-color: white;
+  color: white;
+}
+
+.hero .btn-outline:hover {
+  background-color: white;
+  color: var(--color-primary);
+}
+
+/* Demos Preview Section */
+.demos-preview {
+  background-color: var(--color-background);
+}
+
+.section-intro {
+  color: var(--color-text-light);
+  max-width: 600px;
+  margin: 0 auto var(--spacing-xl);
+}
+
+.demo-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--spacing-lg);
+  margin-top: var(--spacing-xl);
+}
+
+.demo-card {
+  background-color: var(--color-background);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: var(--spacing-lg);
+  transition: all 0.3s;
+}
+
+.demo-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transform: translateY(-4px);
+}
+
+.demo-card h3 {
+  color: var(--color-text);
+  margin-bottom: var(--spacing-sm);
+}
+
+.demo-card p {
+  color: var(--color-text-light);
+  margin-bottom: var(--spacing-md);
+  line-height: 1.6;
+}
+
+.demo-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-xs);
+  margin-bottom: var(--spacing-md);
+}
+
+.tag {
+  background-color: var(--color-background-alt);
+  color: var(--color-text-light);
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.demo-link {
+  color: var(--color-primary);
+  font-weight: 600;
+  display: inline-block;
+}
+
+.demo-link:hover {
+  color: var(--color-primary-dark);
+}
+
+/* CTA Section */
+.cta {
+  background-color: var(--color-background-alt);
+}
+
+.cta-content {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.cta h2 {
+  margin-bottom: var(--spacing-md);
+}
+
+.cta p {
+  color: var(--color-text-light);
+  font-size: 1.1rem;
+  margin-bottom: var(--spacing-xl);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 2rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+
+  .demo-cards {
+    grid-template-columns: 1fr;
+  }
+}

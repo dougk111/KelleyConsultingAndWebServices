@@ -1,0 +1,78 @@
+<div class="about">
+  <!-- Header Section -->
+  <section class="page-header section">
+    <div class="container">
+      <h1>About Kelley Consulting & Web Services</h1>
+      <p class="page-intro">
+        Building professional web solutions that help businesses succeed online.
+      </p>
+    </div>
+  </section>
+
+  <!-- About Content Section -->
+  <section class="about-content section">
+    <div class="container">
+      <div class="content-grid">
+        <div class="about-text">
+          <h2>Our Mission</h2>
+          <p>
+            At Kelley Consulting & Web Services, we specialize in creating custom web solutions
+            that meet the unique needs of each client. With a focus on quality, performance, and
+            user experience, we deliver websites and applications that drive real business results.
+          </p>
+          <p>
+            Our approach combines technical expertise with a deep understanding of business
+            objectives. We don't just build websites—we create digital tools that help our clients
+            achieve their goals, whether that's attracting new customers, streamlining operations,
+            or establishing a strong online presence.
+          </p>
+          <p>
+            Every project is an opportunity to solve problems creatively and deliver solutions that
+            exceed expectations. We pride ourselves on clear communication, attention to detail,
+            and a commitment to excellence in every line of code.
+          </p>
+        </div>
+
+        <div class="expertise-section">
+          <h3>Areas of Expertise</h3>
+          @for (item of expertise; track item.area) {
+            <div class="expertise-item">
+              <h4>{{ item.area }}</h4>
+              <p>{{ item.description }}</p>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tech Stack Section -->
+  <section class="tech-section section">
+    <div class="container">
+      <h2 class="text-center">Technology Stack</h2>
+      <p class="section-intro text-center">
+        We work with modern, industry-standard technologies to deliver robust and maintainable
+        solutions.
+      </p>
+      <div class="tech-grid">
+        @for (tech of technologies; track tech) {
+          <div class="tech-item">{{ tech }}</div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta section">
+    <div class="container">
+      <div class="cta-content">
+        <h2>Let's Work Together</h2>
+        <p>
+          Ready to start your next web project? Get in touch to discuss how we can help bring your
+          vision to life.
+        </p>
+        <a routerLink="/contact" class="btn">Contact Us</a>
+      </div>
+    </div>
+  </section>
+</div>

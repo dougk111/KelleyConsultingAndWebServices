@@ -1,0 +1,91 @@
+<div class="demo-detail">
+  @if (demo(); as currentDemo) {
+    <!-- Header Section -->
+    <section class="demo-header section">
+      <div class="container">
+        <div class="breadcrumb">
+          <a routerLink="/demos">← Back to Demos</a>
+        </div>
+        <h1>{{ currentDemo.title }}</h1>
+        <p class="demo-subtitle">{{ currentDemo.subtitle }}</p>
+      </div>
+    </section>
+
+    <!-- Overview Section -->
+    <section class="demo-overview section">
+      <div class="container">
+        <div class="overview-content">
+          <div class="overview-text">
+            <h2>Overview</h2>
+            <p>{{ currentDemo.description }}</p>
+          </div>
+
+          <div class="demo-placeholder">
+            <div class="placeholder-content">
+              <p>{{ currentDemo.title }}</p>
+              <small>Interactive Demo Preview</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="demo-features section">
+      <div class="container">
+        <h2>Key Features</h2>
+        <div class="features-grid">
+          @for (feature of currentDemo.features; track feature) {
+            <div class="feature-item">
+              <span class="feature-icon">✓</span>
+              <p>{{ feature }}</p>
+            </div>
+          }
+        </div>
+      </div>
+    </section>
+
+    <!-- Tech Stack Section -->
+    <section class="tech-stack section">
+      <div class="container">
+        <h2>Technology Stack</h2>
+        <div class="tech-tags">
+          @for (tech of currentDemo.techStack; track tech) {
+            <span class="tech-tag">{{ tech }}</span>
+          }
+        </div>
+      </div>
+    </section>
+
+    <!-- Highlights Section -->
+    <section class="highlights section">
+      <div class="container">
+        <h2>Project Highlights</h2>
+        <ul class="highlights-list">
+          @for (highlight of currentDemo.highlights; track highlight) {
+            <li>{{ highlight }}</li>
+          }
+        </ul>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="demo-cta section">
+      <div class="container">
+        <div class="cta-content">
+          <h2>Interested in a Similar Solution?</h2>
+          <p>Let's discuss how we can create a custom web solution for your business needs.</p>
+          <a routerLink="/contact" class="btn">Get In Touch</a>
+        </div>
+      </div>
+    </section>
+  } @else {
+    <section class="section">
+      <div class="container">
+        <h1>Demo Not Found</h1>
+        <p>The requested demo could not be found.</p>
+        <a routerLink="/demos" class="btn">Back to Demos</a>
+      </div>
+    </section>
+  }
+</div>
