@@ -7,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrl: './contact.css',
 })
 export class Contact {
-  protected readonly email = 'info@kelleyconsulting.com';
+  protected readonly email = 'info@KelleyConsultingWebServices.com';
 }
