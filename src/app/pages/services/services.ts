@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Title, Meta } from '@angular/platform-browser';
 
 interface Service {
   title: string;
@@ -18,7 +19,7 @@ interface ProcessStep {
   templateUrl: './services.html',
   styleUrl: './services.css',
 })
-export class Services {
+export class Services implements OnInit {
   protected readonly services: Service[] = [
     {
       title: 'Custom Web Development',
@@ -92,4 +93,12 @@ export class Services {
         'We deploy your solution, provide training, and ensure a smooth handoff.',
     },
   ];
+
+  constructor(private title: Title, private meta: Meta) {}
+
+  ngOnInit(): void {
+    this.title.setTitle('Services — Kelley Consulting & Web Services');
+    this.meta.updateTag({ name: 'description', content: 'Services offered by Kelley Consulting & Web Services.' });
+  }
 }
+

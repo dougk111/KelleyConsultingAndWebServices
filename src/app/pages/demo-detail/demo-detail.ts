@@ -1,5 +1,6 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
+import { Title, Meta } from '@angular/platform-browser';
 
 interface DemoContent {
   id: string;
@@ -19,6 +20,8 @@ interface DemoContent {
 })
 export class DemoDetail implements OnInit {
   protected readonly demo = signal<DemoContent | null>(null);
+  protected readonly previewOpen = signal(false);
+  protected readonly previewSrc = signal<string | null>(null);
 
   private readonly demoData: Record<string, DemoContent> = {
     'small-business': {
@@ -98,13 +101,31 @@ export class DemoDetail implements OnInit {
     },
   };
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute, private title: Title, private meta: Meta) {}
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       const id = params['id'];
       const demoContent = this.demoData[id];
       this.demo.set(demoContent || null);
+      if (demoContent) {
+        this.title.setTitle(`${demoContent.title} — Kelley Consulting & Web Services`);
+        this.meta.updateTag({ name: 'description', content: demoContent.subtitle || demoContent.description });
+        this.meta.updateTag({ property: 'og:title', content: demoContent.title });
+        this.meta.updateTag({ property: 'og:description', content: demoContent.subtitle || demoContent.description });
+      }
     });
+  }
+
+  protected openPreview(src?: string) {
+    const resolved = src || '/assets/demos/small-business.svg';
+    console.log('Opening preview for', resolved);
+    this.previewSrc.set(resolved);
+    this.previewOpen.set(true);
+  }
+
+  protected closePreview() {
+    this.previewOpen.set(false);
+    this.previewSrc.set(null);
   }
 }

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675">
+  <rect width="100%" height="100%" fill="#f3f4f6" />
+  <g fill="#111827" font-family="Arial, Helvetica, sans-serif">
+    <text x="60" y="120" font-size="36" font-weight="700">Example Local Service Company</text>
+    <rect x="60" y="150" width="500" height="260" fill="#ffffff" stroke="#e5e7eb" rx="8" />
+    <text x="80" y="190" font-size="18">Hero heading — Clear value proposition</text>
+    <text x="80" y="220" font-size="14" fill="#6b7280">Short supporting paragraph explaining services and CTA.</text>
+    <rect x="640" y="150" width="480" height="260" fill="#ffffff" stroke="#e5e7eb" rx="8" />
+    <text x="660" y="190" font-size="16">Service list / features</text>
+    <text x="660" y="220" font-size="14" fill="#6b7280">Service A • Service B • Service C</text>
+  </g>
+</svg>
