@@ -1,0 +1,10 @@
+.demo-site .demo-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-lg);
+}
+.demo-site .demo-nav nav a { margin-left: var(--spacing-md); }
+.hero { padding: var(--spacing-xl) 0; background-color: var(--color-background-alt); border-radius: 8px; }
+.hero h1 { margin-bottom: var(--spacing-sm); }
+.demo-footer { margin-top: var(--spacing-xl); padding: var(--spacing-md) 0; color: var(--color-text-light); }

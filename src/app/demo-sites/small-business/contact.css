@@ -1,0 +1,5 @@
+.contact-form { padding: var(--spacing-lg) 0; }
+.contact-form label { display:block; margin-bottom: var(--spacing-md); }
+.contact-form input, .contact-form textarea { width:100%; padding: var(--spacing-sm); border:1px solid var(--color-border); border-radius:4px; }
+.banner.success { background: #e6ffed; border: 1px solid #9ae6b4; padding: var(--spacing-sm); margin-bottom: var(--spacing-md); }
+.banner.error { background: #fff1f2; border: 1px solid #fca5a5; padding: var(--spacing-sm); margin-bottom: var(--spacing-md); }

@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { Title, Meta } from '@angular/platform-browser';
 
 interface DemoCard {
   id: string;
@@ -14,7 +15,7 @@ interface DemoCard {
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
-export class Home {
+export class Home implements OnInit {
   protected readonly demos: DemoCard[] = [
     {
       id: 'small-business',
@@ -38,4 +39,10 @@ export class Home {
       tags: ['Analytics', 'Data Visualization', 'Management'],
     },
   ];
+  constructor(private title: Title, private meta: Meta) {}
+
+  ngOnInit(): void {
+    this.title.setTitle('Home — Kelley Consulting & Web Services');
+    this.meta.updateTag({ name: 'description', content: 'Kelley Consulting & Web Services — modern web solutions for small businesses.' });
+  }
 }

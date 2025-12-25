@@ -1,0 +1,47 @@
+<div class="demo-site">
+  <div class="demo-nav">
+    <a routerLink="/demos">← Back to Demos</a>
+    <nav>
+      <a routerLink="/demo-sites/small-business">Home</a>
+      <a routerLink="/demo-sites/small-business/services">Services</a>
+      <a routerLink="/demo-sites/small-business/about">About</a>
+      <a routerLink="/demo-sites/small-business/contact">Contact</a>
+    </nav>
+  </div>
+
+  <section class="hero">
+    <div class="container">
+      <h1>Contact Us</h1>
+      <p>Send us a message and we'll get back to you shortly.</p>
+    </div>
+  </section>
+
+  <section class="contact-form">
+    <div class="container">
+      @if (success();) {
+        <div class="banner success">Thanks — your message was sent.</div>
+      } @else {
+        @if (error(); as err) {
+          <div class="banner error">{{ err }}</div>
+        }
+        <form (submit)="submitForm($event)" netlify="true" name="small-business-contact">
+          <input type="hidden" name="form-name" value="small-business-contact" />
+          <div style="display:none;">
+            <label>Don’t fill this out if you're human: <input name="bot-field" /></label>
+          </div>
+
+          <label>Name*<input name="name" required /></label>
+          <label>Email*<input name="email" type="email" required /></label>
+          <label>Phone<input name="phone" /></label>
+          <label>Message*<textarea name="message" rows="6" required></textarea></label>
+
+          <button class="btn" type="submit" [attr.aria-busy]="loading()">Send</button>
+        </form>
+      }
+    </div>
+  </section>
+
+  <footer class="demo-footer">
+    <div class="container">© Example Local Service Company</div>
+  </footer>
+</div>

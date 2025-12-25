@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { Title, Meta } from '@angular/platform-browser';
 
 interface Demo {
   id: string;
@@ -15,7 +16,7 @@ interface Demo {
   templateUrl: './demos.html',
   styleUrl: './demos.css',
 })
-export class Demos {
+export class Demos implements OnInit {
   protected readonly demos: Demo[] = [
     {
       id: 'small-business',
@@ -60,4 +61,10 @@ export class Demos {
       ],
     },
   ];
+  constructor(private title: Title, private meta: Meta) {}
+
+  ngOnInit(): void {
+    this.title.setTitle('Demos — Kelley Consulting & Web Services');
+    this.meta.updateTag({ name: 'description', content: 'Interactive demos and example projects.' });
+  }
 }

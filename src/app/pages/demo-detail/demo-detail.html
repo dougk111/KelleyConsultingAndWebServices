@@ -18,13 +18,32 @@
           <div class="overview-text">
             <h2>Overview</h2>
             <p>{{ currentDemo.description }}</p>
+            <h3>What problem this solves</h3>
+            <p>
+              This brochure site helps local businesses present their services clearly,
+              build trust with potential customers, and convert visitors into leads
+              through prominent contact points and persuasive content.
+            </p>
+            <h3>Ideal use case</h3>
+            <p>
+              Small, service-based local businesses (plumbers, landscapers, salons,
+              consultants) that need an online presence to showcase services and
+              capture inquiries.
+            </p>
           </div>
 
-          <div class="demo-placeholder">
-            <div class="placeholder-content">
-              <p>{{ currentDemo.title }}</p>
-              <small>Interactive Demo Preview</small>
-            </div>
+          <div class="demo-screenshot">
+            <button type="button" class="screenshot-thumb" aria-label="Open preview" (click)="openPreview()">
+              <img
+                src="/assets/demos/small-business.svg"
+                alt="Small business demo screenshot"
+                loading="lazy"
+                width="800"
+                height="450"
+                (click)="openPreview('/assets/demos/small-business.svg')"
+              />
+            </button>
+            <div class="screenshot-caption">Click to enlarge preview</div>
           </div>
         </div>
       </div>
@@ -75,10 +94,23 @@
         <div class="cta-content">
           <h2>Interested in a Similar Solution?</h2>
           <p>Let's discuss how we can create a custom web solution for your business needs.</p>
-          <a routerLink="/contact" class="btn">Get In Touch</a>
+          <div class="cta-actions">
+            <a routerLink="/demo-sites/small-business" class="btn primary">Open Live Demo</a>
+            <a routerLink="/contact" class="btn">Request Similar Solution</a>
+          </div>
         </div>
       </div>
     </section>
+
+    @if (previewOpen();) {
+      <div class="preview-modal" role="dialog" aria-modal="true">
+        <div class="preview-inner">
+          <button class="preview-close" (click)="closePreview()">✕</button>
+          <img src="{{ previewSrc() }}" alt="Preview" loading="lazy" width="1200" height="675" />
+        </div>
+        <div class="preview-backdrop" (click)="closePreview()"></div>
+      </div>
+    }
   } @else {
     <section class="section">
       <div class="container">

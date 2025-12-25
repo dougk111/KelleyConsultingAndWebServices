@@ -1,0 +1,2 @@
+.team { padding: var(--spacing-lg) 0; }
+.team p { max-width: 700px; color: var(--color-text-light); }

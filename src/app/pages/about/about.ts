@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { Title, Meta } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-about',
@@ -7,7 +8,7 @@ import { RouterLink } from '@angular/router';
   templateUrl: './about.html',
   styleUrl: './about.css',
 })
-export class About {
+export class About implements OnInit {
   protected readonly technologies = [
     'Angular',
     'TypeScript',
@@ -42,4 +43,10 @@ export class About {
       description: 'Fast-loading, efficient applications that provide excellent user experiences.',
     },
   ];
-}
+    constructor(private title: Title, private meta: Meta) {}
+
+    ngOnInit(): void {
+      this.title.setTitle('About — Kelley Consulting & Web Services');
+      this.meta.updateTag({ name: 'description', content: 'About Kelley Consulting & Web Services.' });
+    }
+  }
