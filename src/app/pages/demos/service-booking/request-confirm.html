@@ -1,0 +1,49 @@
+<div class="request-confirm page">
+  <section class="page-header section">
+    <div class="container">
+      <a routerLink="/demos/service-booking" class="muted">← Back</a>
+      <h1>Request Received</h1>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div *ngIf="loading">Loading…</div>
+
+      <div *ngIf="notFound && !loading">
+        <h2>Request not found</h2>
+        <p>The requested quote could not be found. You can submit a new request.</p>
+        <a routerLink="/demos/service-booking/request-quote" class="btn">Submit a New Request</a>
+      </div>
+
+      <div *ngIf="request && !loading" class="card">
+        <h2>Thank you — we received your request</h2>
+        <p class="muted">Request ID: <strong>{{ request.id }}</strong></p>
+        <dl>
+          <dt>Service</dt>
+          <dd>{{ request.serviceType }}</dd>
+
+          <dt>Location</dt>
+          <dd>{{ request.city }}, {{ request.state }}</dd>
+
+          <dt>Preferred Dates</dt>
+          <dd>{{ request.preferredDateFrom || 'N/A' }} — {{ request.preferredDateTo || 'N/A' }}</dd>
+
+          <dt>Submitted</dt>
+          <dd>{{ request.createdAt }}</dd>
+
+          <dt>Status</dt>
+          <dd>{{ request.status }}</dd>
+        </dl>
+
+        <p>We’ll review and contact you within 1 business day.</p>
+        <div class="actions">
+          <a routerLink="/demos/service-booking/request-quote" class="btn">Submit Another Request</a>
+          <a routerLink="/demos" class="btn">Back to Demos</a>
+        </div>
+
+        <div class="note">Request history (coming soon)</div>
+      </div>
+    </div>
+  </section>
+</div>

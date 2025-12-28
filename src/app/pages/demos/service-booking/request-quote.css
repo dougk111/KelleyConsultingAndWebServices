@@ -1,0 +1,7 @@
+.request-quote .card { padding: 1rem; margin-bottom: 1rem; background: #fff; border-radius: 6px; box-shadow: 0 1px 2px rgba(0,0,0,0.04);} 
+.request-quote label { display:block; margin-bottom:0.5rem; }
+.request-quote input, .request-quote select, .request-quote textarea { width:100%; padding:0.5rem; border:1px solid #ddd; border-radius:4px; }
+.field-error { color:#b00020; font-size:0.9rem; margin-top:0.25rem; }
+.actions { display:flex; gap:0.75rem; align-items:center; margin-top:1rem; }
+.error-banner { background:#fff1f0; border:1px solid #f3c2c2; color:#7a1d1d; padding:0.75rem; border-radius:4px; }
+.toast { margin-top:1rem; background:#e6ffed; border:1px solid #b7f0c6; padding:0.5rem 0.75rem; border-radius:4px; }

@@ -9,12 +9,16 @@ import { SmallBusinessHome } from './demo-sites/small-business/home';
 import { SmallBusinessServices } from './demo-sites/small-business/services';
 import { SmallBusinessAbout } from './demo-sites/small-business/about';
 import { SmallBusinessContact } from './demo-sites/small-business/contact';
+import { RequestQuote } from './pages/demos/service-booking/request-quote';
+import { RequestConfirm } from './pages/demos/service-booking/request-confirm';
 
 export const routes: Routes = [
   { path: '', component: Home },
   { path: 'services', component: Services },
   { path: 'demos', component: Demos },
   { path: 'demos/:id', component: DemoDetail },
+  { path: 'demos/service-booking/request-quote', component: RequestQuote },
+  { path: 'demos/service-booking/request-quote/confirm/:id', component: RequestConfirm },
   { path: 'demo-sites/small-business', component: SmallBusinessHome },
   { path: 'demo-sites/small-business/services', component: SmallBusinessServices },
   { path: 'demo-sites/small-business/about', component: SmallBusinessAbout },

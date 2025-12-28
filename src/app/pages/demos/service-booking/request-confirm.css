@@ -1,0 +1,5 @@
+.request-confirm .card { padding:1rem; border-radius:6px; background:#fff; box-shadow:0 1px 2px rgba(0,0,0,0.04); }
+.request-confirm dl { display:grid; grid-template-columns: 120px 1fr; gap:0.5rem 1rem; }
+.request-confirm dt { font-weight:600; color:#333; }
+.request-confirm dd { margin:0; color:#555; }
+.request-confirm .note { margin-top:1rem; color:#666; font-size:0.9rem; }

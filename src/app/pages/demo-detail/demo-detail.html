@@ -97,6 +97,11 @@
           <div class="cta-actions">
             <a routerLink="/demo-sites/small-business" class="btn primary">Open Live Demo</a>
             <a routerLink="/contact" class="btn">Request Similar Solution</a>
+            @if (demo(); as currentDemo) {
+              @if (currentDemo.id === 'service-booking') {
+                <a routerLink="/demos/service-booking/request-quote" class="btn primary">Request a Quote</a>
+              }
+            }
           </div>
         </div>
       </div>

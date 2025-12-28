@@ -1,0 +1,85 @@
+<div class="request-quote page">
+  <section class="page-header section">
+    <div class="container">
+      <a routerLink="/demos/service-booking" class="muted">← Back</a>
+      <h1>Request a Quote</h1>
+      <p class="page-intro">Fill out the form below and we'll review your request.</p>
+    </div>
+  </section>
+
+  <section class="form-section section">
+    <div class="container">
+      <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
+        <div class="card">
+          <h2>Service</h2>
+          <label>
+            Service Type
+            <select formControlName="serviceType">
+              <option value="">-- Select Service --</option>
+              <option *ngFor="let s of serviceTypes" [value]="s">{{ s }}</option>
+            </select>
+          </label>
+          <div class="field-error" *ngIf="(form.get('serviceType')?.touched || formSubmitted) && form.get('serviceType')?.invalid">
+            Service type is required.
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>Contact</h2>
+          <label>
+            Full name
+            <input type="text" formControlName="customerName" />
+          </label>
+          <div class="field-error" *ngIf="(form.get('customerName')?.touched || formSubmitted) && form.get('customerName')?.invalid">Name is required.</div>
+
+          <label>
+            Email
+            <input type="email" formControlName="customerEmail" />
+          </label>
+          <div class="field-error" *ngIf="(form.get('customerEmail')?.touched || formSubmitted) && form.get('customerEmail')?.invalid">
+            Enter a valid email.
+          </div>
+
+          <label>
+            Phone (optional)
+            <input type="tel" formControlName="customerPhone" />
+          </label>
+        </div>
+
+        <div class="card">
+          <h2>Location</h2>
+          <label>Address Line 1<input type="text" formControlName="addressLine1" /></label>
+          <div class="field-error" *ngIf="(form.get('addressLine1')?.touched || formSubmitted) && form.get('addressLine1')?.invalid">Address is required.</div>
+
+          <label>Address Line 2<input type="text" formControlName="addressLine2" /></label>
+
+          <label>City<input type="text" formControlName="city" /></label>
+          <div class="field-error" *ngIf="(form.get('city')?.touched || formSubmitted) && form.get('city')?.invalid">City is required.</div>
+
+          <label>State<input type="text" formControlName="state" /></label>
+          <div class="field-error" *ngIf="(form.get('state')?.touched || formSubmitted) && form.get('state')?.invalid">State is required.</div>
+
+          <label>Zip<input type="text" formControlName="zip" maxlength="5" /></label>
+          <div class="field-error" *ngIf="(form.get('zip')?.touched || formSubmitted) && form.get('zip')?.invalid">Enter a 5-digit zip code.</div>
+        </div>
+
+        <div class="card">
+          <h2>Details</h2>
+          <label>Details<textarea formControlName="details" rows="6"></textarea></label>
+          <div class="field-error" *ngIf="(form.get('details')?.touched || formSubmitted) && form.get('details')?.invalid">Provide at least 20 characters.</div>
+
+          <label>Preferred Date From<input type="date" formControlName="preferredDateFrom" /></label>
+          <label>Preferred Date To<input type="date" formControlName="preferredDateTo" /></label>
+        </div>
+
+        <div class="actions">
+          <div *ngIf="error" class="error-banner">{{ error }}</div>
+          <button class="btn primary" type="submit" [disabled]="submitting">{{ submitting ? 'Submitting…' : 'Submit Request' }}</button>
+          <a routerLink="/demos" class="btn">Cancel</a>
+        </div>
+
+        <div *ngIf="showEmailQueued" class="toast">Confirmation email queued (demo).</div>
+      </form>
+    </div>
+  </section>
+</div>
