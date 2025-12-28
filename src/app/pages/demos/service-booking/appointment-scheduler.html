@@ -1,0 +1,25 @@
+<div class="appointment-scheduler">
+  <div class="scheduler-grid">
+    <div class="days">
+      <h3>Select a day</h3>
+      <div class="day-list">
+        <button *ngFor="let d of days" (click)="pickDate(d.iso)" [class.active]="d.iso===selectedDate">{{ d.label }}</button>
+      </div>
+    </div>
+
+    <div class="slots">
+      <h3>Available slots</h3>
+      <div *ngIf="slots.length===0">No available slots for this day.</div>
+      <div class="slot-grid">
+        <button *ngFor="let s of slots" (click)="pickTime(s.time)" [disabled]="!s.available" [class.selected]="s.time===selectedTime">
+          <div class="time">{{ s.time }}</div>
+          <div class="meta" *ngIf="!s.available">{{ s.reason }}</div>
+        </button>
+      </div>
+      <div class="actions">
+        <div class="error" *ngIf="error">{{ error }}</div>
+        <button class="btn primary" (click)="confirm()" [disabled]="submitting">{{ submitting ? 'Booking…' : 'Confirm Appointment' }}</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -37,6 +37,25 @@
         </dl>
 
         <p>We’ll review and contact you within 1 business day.</p>
+
+        <!-- Appointment section -->
+        <section class="appointment-section">
+          <h3>Schedule your appointment</h3>
+          <div *ngIf="appointment">
+            <app-appointment-summary [appointment]="appointment" [requestId]="request?.id"></app-appointment-summary>
+            <div class="muted">To reschedule, click Reschedule.</div>
+          </div>
+
+          <div *ngIf="!appointment && !showScheduler">
+            <p>No appointment scheduled yet.</p>
+            <button class="btn primary" (click)="openScheduler()">Schedule an Appointment</button>
+          </div>
+
+          <div *ngIf="showScheduler">
+            <app-appointment-scheduler [requestId]="request?.id"></app-appointment-scheduler>
+          </div>
+        </section>
+
         <div class="actions">
           <a routerLink="/demos/service-booking/request-quote" class="btn">Submit Another Request</a>
           <a routerLink="/demos" class="btn">Back to Demos</a>

@@ -1,3 +1,5 @@
+import { Appointment } from '../pages/demos/service-booking/appointment.model';
+
 export interface QuoteRequest {
   id: string;
   serviceType: string;
@@ -14,4 +16,5 @@ export interface QuoteRequest {
   preferredDateTo?: string;
   createdAt: string;
   status: 'Submitted' | 'In Review' | 'Scheduled' | 'Quoted' | 'Closed';
+  appointment?: Appointment;
 }

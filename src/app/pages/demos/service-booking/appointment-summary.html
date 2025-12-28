@@ -1,0 +1,11 @@
+<div class="appointment-summary card" *ngIf="appointment">
+  <h3>Appointment</h3>
+  <p>Request ID: <strong>{{ appointment.requestId }}</strong></p>
+  <p>Date: <strong>{{ appointment.date }}</strong></p>
+  <p>Time: <strong>{{ appointment.time }}</strong></p>
+  <p>Status: <strong>{{ appointment.status }}</strong></p>
+  <div class="actions">
+    <button class="btn" (click)="reschedule()">Reschedule</button>
+    <button class="btn" (click)="cancel()" [disabled]="cancelling">{{ cancelling ? 'Cancelling…' : 'Cancel' }}</button>
+  </div>
+</div>
