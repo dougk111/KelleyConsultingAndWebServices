@@ -16,7 +16,11 @@
             Service Type
             <select formControlName="serviceType">
               <option value="">-- Select Service --</option>
-              <option *ngFor="let s of serviceTypes" [value]="s">{{ s }}</option>
+              <ng-container *ngFor="let g of serviceGroups">
+                <optgroup [label]="g.group">
+                  <option *ngFor="let s of g.options" [value]="s">{{ s }}</option>
+                </optgroup>
+              </ng-container>
             </select>
           </label>
           <div class="field-error" *ngIf="(form.get('serviceType')?.touched || formSubmitted) && form.get('serviceType')?.invalid">
