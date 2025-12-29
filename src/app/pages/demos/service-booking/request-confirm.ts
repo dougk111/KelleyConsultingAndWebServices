@@ -11,7 +11,7 @@ import { Appointment } from './appointment.model';
 @Component({
   selector: 'app-request-confirm',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, AppointmentScheduler, AppointmentSummary],
   templateUrl: './request-confirm.html',
   styleUrl: './request-confirm.css',
 })

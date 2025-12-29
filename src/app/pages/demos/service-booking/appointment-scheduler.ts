@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AppointmentService } from './appointment.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Appointment } from './appointment.model';
 
 @Component({
   selector: 'app-appointment-scheduler',
@@ -62,7 +63,7 @@ export class AppointmentScheduler {
       return;
     }
     this.submitting = true;
-    const appt = {
+    const appt: Appointment = {
       requestId: this.requestId,
       date: this.selectedDate,
       time: this.selectedTime,

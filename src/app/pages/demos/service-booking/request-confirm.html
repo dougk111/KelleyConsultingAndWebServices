@@ -42,7 +42,7 @@
         <section class="appointment-section">
           <h3>Schedule your appointment</h3>
           <div *ngIf="appointment">
-            <app-appointment-summary [appointment]="appointment" [requestId]="request?.id"></app-appointment-summary>
+            <app-appointment-summary [appointment]="appointment" [requestId]="request.id"></app-appointment-summary>
             <div class="muted">To reschedule, click Reschedule.</div>
           </div>
 
@@ -52,7 +52,7 @@
           </div>
 
           <div *ngIf="showScheduler">
-            <app-appointment-scheduler [requestId]="request?.id"></app-appointment-scheduler>
+            <app-appointment-scheduler [requestId]="request.id"></app-appointment-scheduler>
           </div>
         </section>
 
