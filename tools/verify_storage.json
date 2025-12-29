@@ -1,0 +1,11 @@
+{
+  "kcws_booking_appointments_v1": [
+    {
+      "requestId": "REQ-2025-TEST",
+      "date": "2025-12-28",
+      "time": "09:00",
+      "status": "booked",
+      "createdAt": "2025-12-28T23:18:07.265Z"
+    }
+  ]
+}
