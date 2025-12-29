@@ -9,6 +9,8 @@ import { Title, Meta } from '@angular/platform-browser';
 })
 export class Contact {
   protected readonly email = 'info@KelleyConsultingWebServices.com';
+  protected readonly phone = '(916) 259-3050';
+  protected readonly phoneHref = 'tel:+19162593050';
   constructor(private title: Title, private meta: Meta) {}
 
   ngOnInit(): void {
