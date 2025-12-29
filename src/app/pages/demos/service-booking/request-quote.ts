@@ -18,13 +18,43 @@ export class RequestQuote {
   protected error: string | null = null;
   protected showEmailQueued = false;
 
-  protected readonly serviceTypes = [
-    'Plumbing',
-    'Landscaping',
-    'Electrical',
-    'HVAC',
-    'Cleaning',
-    'Other',
+  protected readonly serviceGroups: { group: string; options: string[] }[] = [
+    {
+      group: 'Core Web & App Services',
+      options: [
+        'Angular Web Application Development',
+        'Custom Web Application (Any Framework)',
+        'Dashboard & Data Visualization',
+        'Business Workflow Automation',
+        'API Development & Integration',
+        'Legacy System Modernization',
+      ],
+    },
+    {
+      group: 'Business & Consulting',
+      options: [
+        'Technical Consulting / Architecture Review',
+        'Performance Optimization & Refactoring',
+        'Code Review & Rescue Project',
+        'Proof of Concept / MVP Build',
+      ],
+    },
+    {
+      group: 'Website & Front-Facing',
+      options: [
+        'Marketing Website / Landing Page',
+        'Small Business Website',
+        'SEO & Performance Optimization',
+      ],
+    },
+    {
+      group: 'Operations & Support',
+      options: [
+        'Maintenance & Ongoing Support',
+        'Hosting, Deployment & CI/CD Setup',
+      ],
+    },
+    { group: 'Catch-All', options: ['Other'] },
   ];
 
   constructor(private fb: FormBuilder, private svc: QuoteRequestService, private router: Router) {
