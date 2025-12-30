@@ -11,6 +11,8 @@ import { SmallBusinessAbout } from './demo-sites/small-business/about';
 import { SmallBusinessContact } from './demo-sites/small-business/contact';
 import { RequestQuote } from './pages/demos/service-booking/request-quote';
 import { RequestConfirm } from './pages/demos/service-booking/request-confirm';
+import { CustomerDashboard } from './pages/demos/service-booking/customer-dashboard';
+import { CustomerRequestDetail } from './pages/demos/service-booking/customer-request-detail';
 
 export const routes: Routes = [
   { path: '', component: Home },
@@ -19,6 +21,8 @@ export const routes: Routes = [
   { path: 'demos/:id', component: DemoDetail },
   { path: 'demos/service-booking/request-quote', component: RequestQuote },
   { path: 'demos/service-booking/request-quote/confirm/:id', component: RequestConfirm },
+  { path: 'demos/service-booking/customer', component: CustomerDashboard },
+  { path: 'demos/service-booking/customer/requests/:id', component: CustomerRequestDetail },
   { path: 'demo-sites/small-business', component: SmallBusinessHome },
   { path: 'demo-sites/small-business/services', component: SmallBusinessServices },
   { path: 'demo-sites/small-business/about', component: SmallBusinessAbout },

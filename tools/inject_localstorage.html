@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>Inject KCWS Data</title></head>
+<body>
+<script>
+(async function(){
+  try{
+    const resp = await fetch('/verify_storage.json');
+    const data = await resp.json();
+    Object.keys(data).forEach(k => localStorage.setItem(k, JSON.stringify(data[k])));
+    console.log('Injected keys:', Object.keys(data));
+    // open app dashboard in default browser tab
+    const appUrl = 'http://localhost:4200/demos/service-booking/customer';
+    // redirect so user sees portal with injected data
+    window.location.href = appUrl;
+  }catch(e){
+    document.body.innerHTML = '<h2>Error injecting data</h2><pre>'+e.toString()+'</pre>';
+    console.error(e);
+  }
+})();
+</script>
+</body>
+</html>

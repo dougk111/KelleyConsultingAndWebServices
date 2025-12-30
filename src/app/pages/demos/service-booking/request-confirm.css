@@ -3,3 +3,28 @@
 .request-confirm dt { font-weight:600; color:#333; }
 .request-confirm dd { margin:0; color:#555; }
 .request-confirm .note { margin-top:1rem; color:#666; font-size:0.9rem; }
+
+.next-steps {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 2px solid #e0e0e0;
+  text-align: center;
+}
+
+.next-steps h3 {
+  margin: 0 0 0.5rem 0;
+  color: #333;
+  font-size: 1.25rem;
+}
+
+.next-steps p {
+  margin: 0 0 1.5rem 0;
+  color: #666;
+  font-size: 0.95rem;
+}
+
+.portal-btn {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  font-weight: 500;
+}

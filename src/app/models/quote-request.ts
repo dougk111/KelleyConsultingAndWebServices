@@ -15,6 +15,7 @@ export interface QuoteRequest {
   preferredDateFrom?: string;
   preferredDateTo?: string;
   createdAt: string;
+  updatedAt?: string;
   status: 'Submitted' | 'In Review' | 'Scheduled' | 'Quoted' | 'Closed';
   appointment?: Appointment;
 }

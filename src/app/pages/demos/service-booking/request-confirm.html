@@ -56,12 +56,23 @@
           </div>
         </section>
 
+        <!-- Next Steps Section -->
+        <section class="next-steps">
+          <h3>Next Step</h3>
+          <p>Track your request status, upload photos, and view updates in the Customer Portal.</p>
+          <a
+            [routerLink]="['/demos/service-booking/customer']"
+            [queryParams]="{ highlight: request.id }"
+            class="btn primary portal-btn"
+          >
+            View your requests in the Customer Portal
+          </a>
+        </section>
+
         <div class="actions">
           <a routerLink="/demos/service-booking/request-quote" class="btn">Submit Another Request</a>
           <a routerLink="/demos" class="btn">Back to Demos</a>
         </div>
-
-        <div class="note">Request history (coming soon)</div>
       </div>
     </div>
   </section>

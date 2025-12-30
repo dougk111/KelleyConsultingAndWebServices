@@ -1,7 +1,9 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { delay } from 'rxjs/operators';
+import { delay, tap } from 'rxjs/operators';
 import { Appointment } from './appointment.model';
+import { ActivityLogService } from './activity-log.service';
+import { RequestRepositoryService } from './request-repository.service';
 
 const STORAGE_KEY = 'kcws_booking_appointments_v1';
 
@@ -32,6 +34,9 @@ function dateHash(s: string) {
 
 @Injectable({ providedIn: 'root' })
 export class AppointmentService {
+  private activityLog = inject(ActivityLogService);
+  private requestRepo = inject(RequestRepositoryService);
+
   getAppointment(requestId: string): Observable<Appointment | undefined> {
     const items = safeRead();
     const found = items.find((a) => a.requestId === requestId);
@@ -41,13 +46,36 @@ export class AppointmentService {
   saveAppointment(appointment: Appointment): Observable<Appointment> {
     const items = safeRead();
     const existingIndex = items.findIndex((a) => a.requestId === appointment.requestId && a.status === 'booked');
-    if (existingIndex >= 0) {
+    const isReschedule = existingIndex >= 0;
+    const oldAppointment = isReschedule ? items[existingIndex] : null;
+
+    if (isReschedule) {
       items[existingIndex] = { ...items[existingIndex], ...appointment, updatedAt: new Date().toISOString() };
     } else {
       items.push({ ...appointment, createdAt: new Date().toISOString(), status: 'booked' });
     }
     safeWrite(items);
-    return of(appointment).pipe(delay(300));
+
+    return of(appointment).pipe(
+      delay(300),
+      tap((apt) => {
+        // Update request with appointment and set status to Scheduled
+        this.requestRepo.attachAppointment(apt.requestId, apt);
+
+        // Log appropriate activity event
+        if (isReschedule && oldAppointment) {
+          this.activityLog.logAppointmentRescheduled(
+            apt.requestId,
+            oldAppointment.date,
+            oldAppointment.time,
+            apt.date,
+            apt.time
+          );
+        } else {
+          this.activityLog.logAppointmentBooked(apt.requestId, apt.date, apt.time);
+        }
+      })
+    );
   }
 
   cancelAppointment(requestId: string): Observable<boolean> {
@@ -57,6 +85,11 @@ export class AppointmentService {
       items[idx].status = 'canceled';
       items[idx].updatedAt = new Date().toISOString();
       safeWrite(items);
+
+      // Update request and log activity
+      this.requestRepo.detachAppointment(requestId);
+      this.activityLog.logAppointmentCanceled(requestId);
+
       return of(true).pipe(delay(200));
     }
     return of(false).pipe(delay(100));
@@ -66,11 +99,21 @@ export class AppointmentService {
     const items = safeRead();
     const idx = items.findIndex((a) => a.requestId === requestId && a.status === 'booked');
     if (idx >= 0) {
+      const oldDate = items[idx].date;
+      const oldTime = items[idx].time;
+
       items[idx].date = newDate;
       items[idx].time = newTime;
       items[idx].updatedAt = new Date().toISOString();
       safeWrite(items);
-      return of(items[idx]).pipe(delay(250));
+
+      const updatedAppointment = items[idx];
+
+      // Update request and log activity
+      this.requestRepo.attachAppointment(requestId, updatedAppointment);
+      this.activityLog.logAppointmentRescheduled(requestId, oldDate, oldTime, newDate, newTime);
+
+      return of(updatedAppointment).pipe(delay(250));
     }
     return of(undefined).pipe(delay(100));
   }

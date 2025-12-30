@@ -1,0 +1,97 @@
+<div class="customer-dashboard">
+  <header class="dashboard-header">
+    <h1>Customer Portal</h1>
+    <p class="subtitle">Track your requests and appointment status</p>
+  </header>
+
+  <div class="filters">
+    <div class="filter-group">
+      <label for="status-filter">Status:</label>
+      <select
+        id="status-filter"
+        [value]="selectedStatus()"
+        (change)="onStatusFilterChange($event)"
+      >
+        @for (status of statusOptions; track status) {
+          <option [value]="status">{{ status }}</option>
+        }
+      </select>
+    </div>
+
+    <div class="filter-group">
+      <label for="search-input">Search by Request ID:</label>
+      <input
+        type="text"
+        id="search-input"
+        placeholder="REQ-2025-0001"
+        [value]="searchQuery()"
+        (input)="onSearchChange($event)"
+      />
+    </div>
+  </div>
+
+  @if (filteredRequests().length === 0 && requests().length === 0) {
+    <div class="empty-state">
+      <p>No requests yet</p>
+      <a [routerLink]="['/demos/service-booking/request-quote']" class="btn-primary">
+        Create a New Request
+      </a>
+    </div>
+  } @else if (filteredRequests().length === 0) {
+    <div class="empty-state">
+      <p>No requests match your filters</p>
+    </div>
+  } @else {
+    <div class="requests-list">
+      @for (request of filteredRequests(); track request.id) {
+        <div
+          class="request-card"
+          [id]="'request-' + request.id"
+          [class.highlighted]="highlightedRequestId() === request.id"
+        >
+          <div class="request-header">
+            <div class="request-id">{{ request.id }}</div>
+            <span class="status-badge" [ngClass]="getStatusClass(request.status)">
+              {{ request.status }}
+            </span>
+          </div>
+
+          <div class="request-details">
+            <div class="detail-row">
+              <span class="label">Service:</span>
+              <span class="value">{{ request.serviceType }}</span>
+            </div>
+            <div class="detail-row">
+              <span class="label">Created:</span>
+              <span class="value">{{ formatDate(request.createdAt) }}</span>
+            </div>
+            <div class="detail-row">
+              <span class="label">Appointment:</span>
+              <span class="value">{{ formatAppointment(request) }}</span>
+            </div>
+          </div>
+
+          <div class="request-actions">
+            <a
+              [routerLink]="['/demos/service-booking/customer/requests', request.id]"
+              class="btn-view"
+            >
+              View Details
+            </a>
+            @if (
+              !request.appointment &&
+              (request.status === 'Submitted' || request.status === 'In Review')
+            ) {
+              <a
+                [routerLink]="['/demos/service-booking/request-quote/confirm', request.id]"
+                class="btn-schedule"
+              >
+                Schedule Appointment
+              </a>
+            }
+          </div>
+        </div>
+      }
+    </div>
+  }
+</div>

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { QuoteRequestService } from '../../../services/quote-request.service';
 import { QuoteRequest } from '../../../models/quote-request';
 import { AppointmentService } from './appointment.service';
@@ -11,7 +11,7 @@ import { Appointment } from './appointment.model';
 @Component({
   selector: 'app-request-confirm',
   standalone: true,
-  imports: [CommonModule, AppointmentScheduler, AppointmentSummary],
+  imports: [CommonModule, RouterLink, AppointmentScheduler, AppointmentSummary],
   templateUrl: './request-confirm.html',
   styleUrl: './request-confirm.css',
 })

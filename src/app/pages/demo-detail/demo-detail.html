@@ -100,9 +100,15 @@
             @if (demo(); as currentDemo) {
               @if (currentDemo.id === 'service-booking') {
                 <a routerLink="/demos/service-booking/request-quote" class="btn primary">Request a Quote</a>
+                <a routerLink="/demos/service-booking/customer" class="btn primary">View Customer Portal</a>
               }
             }
           </div>
+          @if (demo(); as currentDemo) {
+            @if (currentDemo.id === 'service-booking') {
+              <p class="cta-helper">Track requests, appointment status, quotes, and uploads.</p>
+            }
+          }
         </div>
       </div>
     </section>

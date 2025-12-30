@@ -1,0 +1,157 @@
+<div class="request-detail">
+  @if (loading()) {
+    <div class="loading">Loading request details...</div>
+  } @else if (error()) {
+    <div class="error-state">
+      <p>{{ error() }}</p>
+      <a [routerLink]="['/demos/service-booking/customer']" class="btn-back">
+        Back to Dashboard
+      </a>
+    </div>
+  } @else if (request(); as req) {
+    <header class="detail-header">
+      <div class="header-top">
+        <a [routerLink]="['/demos/service-booking/customer']" class="back-link">
+          ← Back to Dashboard
+        </a>
+        <button class="toggle-simulator" (click)="showStatusSimulator.set(!showStatusSimulator())">
+          {{ showStatusSimulator() ? 'Hide' : 'Show' }} Demo Controls
+        </button>
+      </div>
+      <div class="header-main">
+        <h1>{{ req.id }}</h1>
+        <span class="status-badge" [ngClass]="getStatusClass(req.status)">
+          {{ req.status }}
+        </span>
+      </div>
+    </header>
+
+    @if (showStatusSimulator()) {
+      <div class="demo-simulator">
+        <h3>Demo Controls</h3>
+        <p class="simulator-note">These controls simulate lifecycle changes for demonstration purposes.</p>
+        <div class="simulator-actions">
+          <div class="action-group">
+            <label for="status-select">Change Status:</label>
+            <select
+              id="status-select"
+              [value]="req.status"
+              (change)="onStatusChange($event)"
+            >
+              @for (status of statusOptions; track status) {
+                <option [value]="status">{{ status }}</option>
+              }
+            </select>
+          </div>
+          <button class="btn-simulate-quote" (click)="onSimulateQuoteSent()">
+            Simulate Quote Sent
+          </button>
+        </div>
+      </div>
+    }
+
+    <div class="content-grid">
+      <section class="summary-section">
+        <h2>Summary</h2>
+        <div class="summary-card">
+          <div class="summary-row">
+            <span class="label">Service Type:</span>
+            <span class="value">{{ req.serviceType }}</span>
+          </div>
+          <div class="summary-row">
+            <span class="label">Created:</span>
+            <span class="value">{{ formatDate(req.createdAt) }}</span>
+          </div>
+          <div class="summary-row">
+            <span class="label">Status:</span>
+            <span class="value">{{ req.status }}</span>
+          </div>
+          <div class="summary-row">
+            <span class="label">Appointment:</span>
+            <span class="value">{{ formatAppointment(req) }}</span>
+          </div>
+          @if (req.customerName) {
+            <div class="summary-row">
+              <span class="label">Customer:</span>
+              <span class="value">{{ req.customerName }}</span>
+            </div>
+          }
+        </div>
+
+        @if (!req.appointment && (req.status === 'Submitted' || req.status === 'In Review')) {
+          <div class="action-cta">
+            <a
+              [routerLink]="['/demos/service-booking/request-quote/confirm', req.id]"
+              class="btn-primary"
+            >
+              Schedule Appointment
+            </a>
+          </div>
+        }
+      </section>
+
+      <section class="timeline-section">
+        <h2>Activity Timeline</h2>
+        @if (activityEvents().length === 0) {
+          <p class="no-events">No activity events yet.</p>
+        } @else {
+          <div class="timeline">
+            @for (event of activityEvents(); track event.id) {
+              <div class="timeline-item">
+                <div class="timeline-marker" [ngClass]="getEventIconClass(event.type)"></div>
+                <div class="timeline-content">
+                  <div class="event-message">{{ event.message }}</div>
+                  <div class="event-timestamp">{{ formatTimestamp(event.timestamp) }}</div>
+                </div>
+              </div>
+            }
+          </div>
+        }
+      </section>
+
+      <section class="attachments-section">
+        <h2>Attachments</h2>
+        <div class="upload-area">
+          <label for="file-upload" class="upload-label">
+            <span class="upload-icon">📎</span>
+            <span>Upload Photo or Attachment</span>
+            <input
+              type="file"
+              id="file-upload"
+              (change)="onFileSelect($event)"
+              accept="image/*,.pdf,.doc,.docx"
+            />
+          </label>
+          @if (uploadError()) {
+            <p class="upload-error">{{ uploadError() }}</p>
+          }
+        </div>
+
+        @if (attachments().length === 0) {
+          <p class="no-attachments">No attachments yet.</p>
+        } @else {
+          <div class="attachments-list">
+            @for (attachment of attachments(); track attachment.id) {
+              <div class="attachment-item">
+                <div class="attachment-info">
+                  <div class="attachment-name">{{ attachment.fileName }}</div>
+                  <div class="attachment-meta">
+                    {{ formatFileSize(attachment.fileSizeKb) }} •
+                    {{ formatDate(attachment.uploadedAt) }}
+                  </div>
+                </div>
+                <button
+                  class="btn-remove"
+                  (click)="onRemoveAttachment(attachment.id)"
+                  title="Remove attachment"
+                >
+                  ×
+                </button>
+              </div>
+            }
+          </div>
+        }
+      </section>
+    </div>
+  }
+</div>

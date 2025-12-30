@@ -6,6 +6,71 @@
       "time": "09:00",
       "status": "booked",
       "createdAt": "2025-12-28T23:18:07.265Z"
+    },
+    {
+      "requestId": "REQ-2025-0001",
+      "date": "2025-12-31",
+      "time": "10:00",
+      "status": "booked",
+      "createdAt": "2025-12-29T20:32:36.012Z"
+    }
+  ],
+  "kcws_quote_requests": [
+    {
+      "id": "REQ-2025-0001",
+      "serviceType": "Small Business Website",
+      "customerName": "Test User",
+      "customerEmail": "test@example.com",
+      "customerPhone": "555-1234",
+      "addressLine1": "123 Demo St",
+      "addressLine2": "",
+      "city": "Demo City",
+      "state": "CA",
+      "zip": "90210",
+      "details": "Please provide a simple landing page for our local business with contact form and map.",
+      "preferredDateFrom": null,
+      "preferredDateTo": null,
+      "createdAt": "2025-12-29T20:32:36.011Z",
+      "status": "Scheduled",
+      "appointment": {
+        "date": "2025-12-31",
+        "time": "10:00",
+        "status": "booked",
+        "createdAt": "2025-12-29T20:32:36.012Z"
+      },
+      "updatedAt": "2025-12-29T20:32:36.012Z"
+    }
+  ],
+  "kcws_booking_activity_v1": [
+    {
+      "id": "ACT-1767040356011-0gosvh",
+      "requestId": "REQ-2025-0001",
+      "type": "Created",
+      "message": "Request created via automated verification script",
+      "timestamp": "2025-12-29T20:32:36.012Z"
+    },
+    {
+      "id": "ACT-1767040356012-4r571c",
+      "requestId": "REQ-2025-0001",
+      "type": "AppointmentBooked",
+      "message": "Appointment booked for 2025-12-31 10:00",
+      "timestamp": "2025-12-29T20:32:36.012Z"
+    },
+    {
+      "id": "ACT-1767040356012-ogohfq",
+      "requestId": "REQ-2025-0001",
+      "type": "AttachmentAdded",
+      "message": "Added mock attachment brief.pdf",
+      "timestamp": "2025-12-29T20:32:36.012Z"
+    }
+  ],
+  "kcws_booking_attachments_v1": [
+    {
+      "id": "ATT-1767040356012-2beorc",
+      "requestId": "REQ-2025-0001",
+      "filename": "brief.pdf",
+      "size": 12345,
+      "uploadedAt": "2025-12-29T20:32:36.012Z"
     }
   ]
 }

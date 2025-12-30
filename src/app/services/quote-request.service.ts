@@ -1,7 +1,8 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Observable, of, throwError } from 'rxjs';
-import { delay } from 'rxjs/operators';
+import { delay, tap } from 'rxjs/operators';
 import { QuoteRequest } from '../models/quote-request';
+import { ActivityLogService } from '../pages/demos/service-booking/activity-log.service';
 
 const STORAGE_KEY = 'kcws_quote_requests';
 
@@ -39,6 +40,8 @@ function generateId(existing: QuoteRequest[]): string {
 
 @Injectable({ providedIn: 'root' })
 export class QuoteRequestService {
+  private activityLog = inject(ActivityLogService);
+
   create(request: Omit<QuoteRequest, 'id' | 'createdAt' | 'status'>): Observable<QuoteRequest> {
     const existing = safeReadStorage();
     const id = generateId(existing);
@@ -57,7 +60,11 @@ export class QuoteRequestService {
     existing.push(record);
     safeWriteStorage(existing);
 
-    return of(record).pipe(delay(latency));
+    // Log activity event for request creation
+    return of(record).pipe(
+      delay(latency),
+      tap((req) => this.activityLog.logCreated(req.id, req.createdAt))
+    );
   }
 
   getById(id: string): Observable<QuoteRequest | undefined> {

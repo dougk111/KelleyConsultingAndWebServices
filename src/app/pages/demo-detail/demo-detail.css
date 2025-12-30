@@ -160,6 +160,13 @@
   display: flex;
   gap: var(--spacing-md);
   justify-content: center;
+  flex-wrap: wrap;
+}
+
+.cta-helper {
+  margin-top: var(--spacing-md);
+  color: var(--color-text-light);
+  font-size: 0.95rem;
 }
 
 .screenshot-thumb {

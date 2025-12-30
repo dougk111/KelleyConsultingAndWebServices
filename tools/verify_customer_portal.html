@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Customer Portal Verification</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+      background: #f5f5f5;
+    }
+    h1 {
+      color: #333;
+    }
+    .section {
+      background: white;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .section h2 {
+      margin-top: 0;
+      color: #4a90e2;
+      border-bottom: 2px solid #e0e0e0;
+      padding-bottom: 0.5rem;
+    }
+    pre {
+      background: #f9f9f9;
+      padding: 1rem;
+      border-radius: 4px;
+      overflow-x: auto;
+      border: 1px solid #e0e0e0;
+    }
+    .success {
+      color: #4caf50;
+      font-weight: bold;
+    }
+    .error {
+      color: #d32f2f;
+      font-weight: bold;
+    }
+    .info {
+      color: #2196f3;
+    }
+    .test-result {
+      margin: 0.5rem 0;
+      padding: 0.5rem;
+      border-radius: 4px;
+    }
+    .test-result.pass {
+      background: #e8f5e9;
+      border-left: 4px solid #4caf50;
+    }
+    .test-result.fail {
+      background: #ffebee;
+      border-left: 4px solid #d32f2f;
+    }
+    button {
+      padding: 0.5rem 1rem;
+      background: #4a90e2;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-right: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+    button:hover {
+      background: #3a7bc8;
+    }
+    .links {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .links a {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      background: #4caf50;
+      color: white;
+      text-decoration: none;
+      border-radius: 4px;
+    }
+    .links a:hover {
+      background: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <h1>Customer Portal Verification Tool</h1>
+
+  <div class="section">
+    <h2>Quick Links</h2>
+    <div class="links">
+      <a href="http://localhost:4200/demos/service-booking/request-quote" target="_blank">Create Request</a>
+      <a href="http://localhost:4200/demos/service-booking/customer" target="_blank">Customer Dashboard</a>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Test Actions</h2>
+    <button onclick="createSampleRequest()">Create Sample Request</button>
+    <button onclick="createSampleWithAppointment()">Create Request + Appointment</button>
+    <button onclick="viewStorageData()">View Storage Data</button>
+    <button onclick="clearAllData()">Clear All Data</button>
+  </div>
+
+  <div class="section">
+    <h2>Storage Verification</h2>
+    <div id="verification-results"></div>
+  </div>
+
+  <div class="section">
+    <h2>Data Preview</h2>
+    <div id="data-preview"></div>
+  </div>
+
+  <script>
+    function showResult(message, isSuccess) {
+      const resultDiv = document.getElementById('verification-results');
+      const div = document.createElement('div');
+      div.className = `test-result ${isSuccess ? 'pass' : 'fail'}`;
+      div.textContent = message;
+      resultDiv.appendChild(div);
+    }
+
+    function clearResults() {
+      document.getElementById('verification-results').innerHTML = '';
+    }
+
+    function createSampleRequest() {
+      clearResults();
+
+      const requestId = `REQ-2025-${String(Math.floor(Math.random() * 9999) + 1).padStart(4, '0')}`;
+      const request = {
+        id: requestId,
+        serviceType: 'Web Development',
+        customerName: 'Test Customer',
+        customerEmail: 'test@example.com',
+        customerPhone: '555-1234',
+        addressLine1: '123 Test St',
+        city: 'Test City',
+        state: 'TS',
+        zip: '12345',
+        details: 'This is a test request for verification',
+        createdAt: new Date().toISOString(),
+        status: 'Submitted'
+      };
+
+      // Save to localStorage
+      const requests = JSON.parse(localStorage.getItem('kcws_quote_requests') || '[]');
+      requests.push(request);
+      localStorage.setItem('kcws_quote_requests', JSON.stringify(requests));
+
+      // Create activity event
+      const activityEvent = {
+        id: `ACT-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+        requestId: requestId,
+        type: 'created',
+        message: 'Request submitted',
+        timestamp: new Date().toISOString()
+      };
+
+      const activities = JSON.parse(localStorage.getItem('kcws_booking_activity_v1') || '[]');
+      activities.push(activityEvent);
+      localStorage.setItem('kcws_booking_activity_v1', JSON.stringify(activities));
+
+      showResult(`✓ Created sample request: ${requestId}`, true);
+      showResult('✓ Created activity event', true);
+      viewStorageData();
+    }
+
+    function createSampleWithAppointment() {
+      clearResults();
+
+      const requestId = `REQ-2025-${String(Math.floor(Math.random() * 9999) + 1).padStart(4, '0')}`;
+      const appointmentDate = new Date();
+      appointmentDate.setDate(appointmentDate.getDate() + 7); // 1 week from now
+      const dateStr = appointmentDate.toISOString().split('T')[0];
+
+      const appointment = {
+        requestId: requestId,
+        date: dateStr,
+        time: '10:00',
+        status: 'booked',
+        createdAt: new Date().toISOString()
+      };
+
+      const request = {
+        id: requestId,
+        serviceType: 'Website Redesign',
+        customerName: 'Test Customer',
+        customerEmail: 'test@example.com',
+        customerPhone: '555-1234',
+        addressLine1: '123 Test St',
+        city: 'Test City',
+        state: 'TS',
+        zip: '12345',
+        details: 'This is a test request with appointment',
+        createdAt: new Date().toISOString(),
+        status: 'Scheduled',
+        appointment: appointment
+      };
+
+      // Save request
+      const requests = JSON.parse(localStorage.getItem('kcws_quote_requests') || '[]');
+      requests.push(request);
+      localStorage.setItem('kcws_quote_requests', JSON.stringify(requests));
+
+      // Save appointment
+      const appointments = JSON.parse(localStorage.getItem('kcws_booking_appointments_v1') || '[]');
+      appointments.push(appointment);
+      localStorage.setItem('kcws_booking_appointments_v1', JSON.stringify(appointments));
+
+      // Create activity events
+      const activities = JSON.parse(localStorage.getItem('kcws_booking_activity_v1') || '[]');
+      activities.push({
+        id: `ACT-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+        requestId: requestId,
+        type: 'created',
+        message: 'Request submitted',
+        timestamp: new Date().toISOString()
+      });
+      activities.push({
+        id: `ACT-${Date.now() + 1}-${Math.random().toString(36).substr(2, 9)}`,
+        requestId: requestId,
+        type: 'appointment-booked',
+        message: `Appointment booked for ${dateStr} at 10:00 AM`,
+        timestamp: new Date(Date.now() + 1000).toISOString()
+      });
+      localStorage.setItem('kcws_booking_activity_v1', JSON.stringify(activities));
+
+      showResult(`✓ Created request with appointment: ${requestId}`, true);
+      showResult('✓ Created appointment', true);
+      showResult('✓ Created activity events', true);
+      viewStorageData();
+    }
+
+    function viewStorageData() {
+      clearResults();
+      const previewDiv = document.getElementById('data-preview');
+
+      const requests = JSON.parse(localStorage.getItem('kcws_quote_requests') || '[]');
+      const activities = JSON.parse(localStorage.getItem('kcws_booking_activity_v1') || '[]');
+      const appointments = JSON.parse(localStorage.getItem('kcws_booking_appointments_v1') || '[]');
+      const attachments = JSON.parse(localStorage.getItem('kcws_booking_attachments_v1') || '[]');
+
+      showResult(`Found ${requests.length} request(s)`, true);
+      showResult(`Found ${activities.length} activity event(s)`, true);
+      showResult(`Found ${appointments.length} appointment(s)`, true);
+      showResult(`Found ${attachments.length} attachment(s)`, true);
+
+      let html = '';
+
+      if (requests.length > 0) {
+        html += '<h3>Requests</h3><pre>' + JSON.stringify(requests, null, 2) + '</pre>';
+      }
+
+      if (activities.length > 0) {
+        html += '<h3>Activity Events</h3><pre>' + JSON.stringify(activities, null, 2) + '</pre>';
+      }
+
+      if (appointments.length > 0) {
+        html += '<h3>Appointments</h3><pre>' + JSON.stringify(appointments, null, 2) + '</pre>';
+      }
+
+      if (attachments.length > 0) {
+        html += '<h3>Attachments</h3><pre>' + JSON.stringify(attachments, null, 2) + '</pre>';
+      }
+
+      previewDiv.innerHTML = html || '<p class="info">No data found in localStorage</p>';
+    }
+
+    function clearAllData() {
+      if (!confirm('Are you sure you want to clear all data?')) {
+        return;
+      }
+
+      clearResults();
+      localStorage.removeItem('kcws_quote_requests');
+      localStorage.removeItem('kcws_booking_activity_v1');
+      localStorage.removeItem('kcws_booking_appointments_v1');
+      localStorage.removeItem('kcws_booking_attachments_v1');
+
+      showResult('✓ Cleared all localStorage data', true);
+      document.getElementById('data-preview').innerHTML = '';
+    }
+
+    // Auto-run verification on load
+    window.addEventListener('load', () => {
+      viewStorageData();
+    });
+  </script>
+</body>
+</html>
